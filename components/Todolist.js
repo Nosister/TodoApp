@@ -89,7 +89,7 @@ export default function Todolist() {
         <form className=" col-span-4 cursor-text " onSubmit={handleClick}>
         <div className="grid grid-cols-4 ">
             <input
-            className="border rounded-lg col-span-4 pt-2 pb-2"
+            className="border rounded-lg col-span-4 pt-2 pb-2 bg-white"
             type="text" 
             placeholder="PLAN YOUR DAY"
             value={todo}
@@ -98,7 +98,7 @@ export default function Todolist() {
         </div>
         </form>
 
-        <button className="border col-span-1 rounded-lg bg-white " onClick={handleClick}>plan</button>
+        <button className="border col-span-1 rounded-lg bg-white text-black " onClick={handleClick}>plan</button>
         <div className="col-span-4" />
         <div className="col-span-3" />
      
