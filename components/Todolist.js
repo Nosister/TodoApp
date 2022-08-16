@@ -116,11 +116,12 @@ export default function Todolist() {
              col-span-5 flex  
              flex-row justify-between ">          
            <div className={`text  ${list.complete ? "complete" : "text"}`}>         
+           <p>
            <input type="checkbox" className={`checkbox-round  ${list.complete ? "checkbox-round2" : "checkbox-round"}`} onChange={() => checkboxChange(list.id)}/> 
            {"   "}
             
            {list.text} 
-           
+           </p>
            </div>
            
            
@@ -133,16 +134,19 @@ export default function Todolist() {
             </div>
             
             )}
-            <div className="opacity-25 text-end mr-2">
-            <p>Nosister</p>
-
-            </div>
+            <div className="opacity-25 flex justify-between mr-2">
+            
+            <div>
             <button onClick={finish}>Finish</button>  
             {" | "}
             <button onClick={unfinish}>UnFinish</button>      
             {" | "}      
             <button onClick={all}>All</button>      
             </div>
+            <p>Nosister</p>
+            </div>
+            </div>
+           
 
             <style jsx>{`
         .backgroundpic {
@@ -184,7 +188,7 @@ export default function Todolist() {
     .checkbox-round2 {
         width: 1.3em;
         height: 1.3em;
-        background-color: blue;
+        background-color: #9966FF;
         border-radius: 50%;
         vertical-align: middle;
         border: 1px solid #ddd;
@@ -205,7 +209,10 @@ export default function Todolist() {
 
     .complete {
         text-decoration: line-through;
-        
+    }
+
+    .complete > p{
+        opacity : 0.5;
     }
 
       `}</style>
