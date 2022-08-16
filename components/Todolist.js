@@ -1,4 +1,4 @@
-import { list } from "postcss";
+import Image from "next/image";
 import { useState } from "react"
 
 
@@ -12,7 +12,7 @@ export default function Todolist() {
     ]);
     const [light,setLight] = useState(false);
     
-
+    const [end, setEnd] = useState("");
 
     function handleClick(e) {
         e.preventDefault();
@@ -28,27 +28,62 @@ export default function Todolist() {
     
    
     
-    function checkboxChange(id) {
+    function checkboxChange(id,e) {
+        
         setArrTodo(arrTodo.map(
             list => 
-            list.id !== id ? {...list} : {...list, complete: !list.complete}
-        ))
-    }
+            list.id !== id ? {...list} : {...list, complete: !list.complete,}
+        ));
+        
+
+    };
+
+    function finish() {
+        setEnd("finish");
+    };
+
+    
+    function unfinish() {
+        setEnd("unfinish");
+    };
+
+    function all(){
+        setEnd("");
+    };
+
+    
+
+    console.log(end)
   
    console.log(arrTodo.map(x => x))
-//grid grid-cols-12 gap-1 backgroundpic
+
     return (
         <div className={`grid grid-cols-12 gap-1 ${!light ? "backgroundpic" : "backgroundpicswitch"}`}>
             <div className="col-span-3" />
-            <div className="col-span-2  text-4xl mt-7 text-white">
+            <div className="col-span-4  text-4xl mt-7 text-white">
             <strong><p>
-                T O D {"  "}
+                T O D O
 
-                <input type="checkbox" onChange={()=> setLight(!light)} className="checkbox-light mb-2"/>
+                
                 </p></strong>
         </div>
-        
-        <div className="col-span-6" />
+        <div className="col-span-1 mt-8"> 
+        <button onClick={()=> setLight(!light)} className={``}> 
+                {light ? 
+                <Image 
+                width={30}
+                height={30}
+                src="/icon-sun.svg"
+                /> :
+                <Image 
+                width={30}
+                height={30}
+                src="/icon-moon.svg"
+                />
+            } 
+            </button>
+        </div>
+        <div className="col-span-3" />
         <div className="col-span-3" />
 
         <form className=" col-span-4 cursor-text " onSubmit={handleClick}>
@@ -69,14 +104,19 @@ export default function Todolist() {
      
         <div className="col-span-5 border bg-white rounded-lg">
             
-            {arrTodo.map((list) => 
+            {arrTodo.filter((x) => {
+
+                 return end === "unfinish" ? x.complete === false 
+                 : end === "finish" ? x.complete === true 
+                 : x 
+            } ).map((list) => 
             <div key={list.id} className="grid grid-cols-5 gap-x-1 border-b">
 
              <div className=" pt-2 pb-2 ml-2 mt-1  
              col-span-5 flex  
              flex-row justify-between ">          
            <div className={`text  ${list.complete ? "complete" : "text"}`}>         
-           <input type="checkbox" className="checkbox-round" onChange={() => checkboxChange(list.id)}/> 
+           <input type="checkbox" className={`checkbox-round  ${list.complete ? "checkbox-round2" : "checkbox-round"}`} onChange={() => checkboxChange(list.id)}/> 
            {"   "}
             
            {list.text} 
@@ -95,34 +135,35 @@ export default function Todolist() {
             )}
             <div className="opacity-25 text-end mr-2">
             <p>Nosister</p>
+
             </div>
+            <button onClick={finish}>Finish</button>  
+            {" | "}
+            <button onClick={unfinish}>UnFinish</button>      
+            {" | "}      
+            <button onClick={all}>All</button>      
             </div>
 
             <style jsx>{`
         .backgroundpic {
             background-image: url("bg-desktop-dark.jpg");
             height : 40vh;
+            width : 100%;
         }
 
         .backgroundpicswitch {
             background-image: url("bg-desktop-light.jpg");
             height : 40vh;
+            width : 100%;
         }
 
-        .checkbox-light {
-            
-            width: 0.7em;
-            height: 0.7em;
-            background-color: white;
-            border-radius: 50%;
-            vertical-align: middle;
-            border: 5px solid #fff;
-            appearance: none;
-            -webkit-appearance: none;
-            outline: none;
-            cursor: pointer;
+        .lightswitch {
+            background-image : url("incon-sun.svg");
         }
 
+        .darkswitch {
+            background-image : url("incon-moon.svg");    
+        }
         .checkbox-light:checked {
             background-color: rgba(0, 0, 0, 0);
         }
@@ -136,13 +177,27 @@ export default function Todolist() {
         border: 1px solid #ddd;
         appearance: none;
         -webkit-appearance: none;
-        outline: none;
+        outline: none;       
         cursor: pointer;
     }
 
-    .checkbox-round:checked {
-        background-color: green;
+    .checkbox-round2 {
+        width: 1.3em;
+        height: 1.3em;
+        background-color: blue;
+        border-radius: 50%;
+        vertical-align: middle;
+        border: 1px solid #ddd;
+        appearance: none;
+        -webkit-appearance: none;
+        outline: none;
+        background-image: url("icon-check.svg");
+        background-repeat: no-repeat;
+        background-size:  95% 90%;
+        cursor: pointer;
     }
+
+    
 
     .todolist {
 
@@ -150,7 +205,7 @@ export default function Todolist() {
 
     .complete {
         text-decoration: line-through;
-        opacity: 0.5;
+        
     }
 
       `}</style>
