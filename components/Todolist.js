@@ -58,14 +58,10 @@ export default function Todolist() {
    console.log(arrTodo.map(x => x))
 
     return (
-        <div className={`grid grid-cols-12 gap-1 ${!light ? "backgroundpic" : "backgroundpicswitch"}`}>
-            <div className="col-span-3" />
-            <div className="col-span-4  text-4xl mt-7 text-white">
-            <strong><p>
-                T O D O
-
-                
-                </p></strong>
+        <div className={`grid12 gap-1 ${!light ? "backgroundpic" : "backgroundpicswitch"}`}>
+            <div className="gridspan3-1" />
+            <div className="gridspantodo text-white text-4xl mt-7">
+            <strong><h> T O D O </h></strong>
         </div>
         <div className="col-span-1 mt-8"> 
         <button onClick={()=> setLight(!light)} className={``}> 
@@ -83,13 +79,14 @@ export default function Todolist() {
             } 
             </button>
         </div>
-        <div className="col-span-3" />
-        <div className="col-span-3" />
+        <div className="gridspan4-2" />
+        <div className="gridspan3-1" />
 
-        <form className=" col-span-4 cursor-text " onSubmit={handleClick}>
-        <div className="grid grid-cols-4 ">
+
+        <form className="gridspan5-9 cursor-text " onSubmit={handleClick}>
+        <div className="grid grid-cols-5 ">
             <input
-            className="border rounded-lg col-span-4 pt-2 pb-2 bg-white"
+            className="border rounded-lg col-span-5 pt-2 pb-2 bg-white"
             type="text" 
             placeholder="PLAN YOUR DAY"
             value={todo}
@@ -98,11 +95,10 @@ export default function Todolist() {
         </div>
         </form>
 
-        <button className="border col-span-1 rounded-lg bg-white text-black " onClick={handleClick}>plan</button>
-        <div className="col-span-4" />
-        <div className="col-span-3" />
+        <div className="gridspan4-2" />
+        <div className="gridspan3-1" />
      
-        <div className="col-span-5 border bg-white rounded-lg">
+        <div className="gridspan9-5 border bg-white rounded-lg">
             
             {arrTodo.filter((x) => {
 
@@ -144,7 +140,9 @@ export default function Todolist() {
             <button onClick={all}>All</button>      
             </div>
             <p>Nosister</p>
+            
             </div>
+            
             </div>
            
 
@@ -218,6 +216,68 @@ export default function Todolist() {
     p {
         color: rgb(0 0 0); 
   }
+
+  .grid12 {
+    display : grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+
+
+.gridspan3-1 {
+
+    grid-column: span 1 / span 1;
+  }
+  
+  @media (min-width:480px)   {
+    .gridspan3-1 {
+        grid-column: span 3 / span 3;
+      }
+    }
+
+
+.gridspantodo {
+    grid-column: span 8 / span 8 ;
+}
+    @media (min-width:480px) {
+        .gridspantodo {
+        grid-column: span 4 / span 4;   
+    }
+}
+
+    .gridspan4-2{
+
+        grid-column: span4 / span4;
+      }
+      
+      @media (min-width:480px)   {
+        .gridspan4-2 {
+            grid-column: span 2 / span 2;
+          }
+        }
+
+        .gridspan5-9{
+
+            grid-column: span 5 / span 5;
+          }
+          
+          @media (max-width:480px)   {
+            .gridspan5-9 {
+                grid-column: span 9 / span 9;
+              }
+            }
+
+     .gridspan9-5{
+
+            grid-column: span 5 / span 5;
+          }
+          
+          @media (max-width:480px)   {
+            .gridspan9-5 {
+                grid-column: span 9 / span 9;
+              }
+            }        
+    
 
       `}</style>
         </div>
