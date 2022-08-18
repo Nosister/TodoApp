@@ -133,11 +133,11 @@ export default function Todolist() {
             <div className="opacity-25 flex justify-between mr-2">
             
             <div>
-            <button onClick={finish}>Finish</button>  
+            <button className="text-black" onClick={finish}>Finish</button>  
             {" | "}
-            <button onClick={unfinish}>UnFinish</button>      
+            <button className="text-black" onClick={unfinish}>UnFinish</button>      
             {" | "}      
-            <button onClick={all}>All</button>      
+            <button className="text-black" onClick={all}>All</button>      
             </div>
             <p>Nosister</p>
             
